@@ -24,7 +24,10 @@ class Bitmap:
     '''
 
     def __init__(self, max):
-        self.size = self._calcLength(max) + 1
+        if max % 32 == 0:
+            self.size = self._calcLength(max)
+        else:
+            self.size = self._calcLength(max) + 1
         self.array = [0]*self.size
 
     def _calcLength(self, num):
@@ -39,7 +42,7 @@ class Bitmap:
         elem_num = self.array[eIndex]
         self.array[eIndex] = elem_num | (0x80000000 >> bIndex)
         # print(self.array)
-        print_num_hex(self.array)
+        # print_num_hex(self.array)
 
     def test_num(self, num):
         eIndex = self._calcLength(num)
